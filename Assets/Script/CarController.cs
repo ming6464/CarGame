@@ -4,58 +4,68 @@ using UnityEngine;
 
 [System.Serializable]
 public class AxleInfo {
-    public WheelCollider leftWheel;
-    public WheelCollider rightWheel;
-    public bool motor;
-    public bool steering;
+    public WheelCollider LeftWheel;
+    public WheelCollider RightWheel;
+    public Transform LeftWheelModel;
+    public Transform RightWheelModel;
+    public bool Motor;
+    public bool Steering;
+    public bool Brake;
 }
 
 public class CarController : MonoBehaviour
 {
-    public List<AxleInfo> axleInfos;
-    public float maxMotorTorque;
-    public float maxSteeringAngle;
+    public List<AxleInfo> AxleInfos;
+    public float MaxMotorTorque;
+    public float MaxSteeringAngle;
+    public float BrakeTorque;
+    public bool IsBrake;
+    private float brakeTorque;
 
     // finds the corresponding visual wheel
     // correctly applies the transform
-    public void ApplyLocalPositionToVisuals(WheelCollider collider)
+    public void ApplyLocalPositionToVisuals(WheelCollider collider,Transform wheelTf)
     {
-        if (collider.transform.childCount == 0)
-        {
-            return;
-        }
+        if(collider == null || wheelTf == null) return;
+        
+        collider.GetWorldPose(out Vector3 position, out Quaternion rotation);
 
-        Transform visualWheel = collider.transform.GetChild(0);
-
-        Vector3 position;
-        Quaternion rotation;
-        collider.GetWorldPose(out position, out rotation);
-
-        visualWheel.transform.position = position;
-        visualWheel.transform.rotation = rotation;
+        wheelTf.position = position;
+        wheelTf.rotation = rotation;
     }
 
     public void FixedUpdate()
     {
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
-        float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
+        float motor = MaxMotorTorque * Input.GetAxis("Vertical");
+        float steering = MaxSteeringAngle * Input.GetAxis("Horizontal");
+        
+        if (Input.GetKey(KeyCode.Space)) brakeTorque = BrakeTorque;
+        else brakeTorque = 0f;
 
-        foreach (AxleInfo axleInfo in axleInfos)
+        IsBrake = Input.GetKey(KeyCode.Space);
+        
+        foreach (AxleInfo axleInfo in AxleInfos)
         {
-            if (axleInfo.steering)
+            if (axleInfo.Steering)
             {
-                axleInfo.leftWheel.steerAngle = steering;
-                axleInfo.rightWheel.steerAngle = steering;
+                axleInfo.LeftWheel.steerAngle = steering;
+                axleInfo.RightWheel.steerAngle = steering;
             }
 
-            if (axleInfo.motor)
+            if (axleInfo.Motor)
             {
-                axleInfo.leftWheel.motorTorque = motor;
-                axleInfo.rightWheel.motorTorque = motor;
+                axleInfo.LeftWheel.motorTorque = motor;
+                axleInfo.RightWheel.motorTorque = motor;
             }
 
-            ApplyLocalPositionToVisuals(axleInfo.leftWheel);
-            ApplyLocalPositionToVisuals(axleInfo.rightWheel);
+            if (axleInfo.Brake)
+            {
+                axleInfo.LeftWheel.brakeTorque = brakeTorque;
+                axleInfo.RightWheel.brakeTorque = brakeTorque; 
+            }
+            
+            ApplyLocalPositionToVisuals(axleInfo.LeftWheel,axleInfo.LeftWheelModel);
+            ApplyLocalPositionToVisuals(axleInfo.RightWheel,axleInfo.RightWheelModel);
         }
     }
 }

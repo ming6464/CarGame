@@ -364,7 +364,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 387135892, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
       propertyPath: MaxMotorTorque
-      value: 450
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 387135892, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
+      propertyPath: MaxSteeringAngle
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 387135892, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
       propertyPath: AxleInfos.Array.data[1].Brake
@@ -430,9 +434,17 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5621016436519351496, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 30000
+      objectReference: {fileID: 0}
     - target: {fileID: 6309422545080751149, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
       propertyPath: m_Mass
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309422545080751149, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 30000
       objectReference: {fileID: 0}
     - target: {fileID: 6309422545080751149, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
       propertyPath: m_SidewaysFriction.m_Stiffness
@@ -442,9 +454,17 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 6619028324163061385, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 30000
+      objectReference: {fileID: 0}
     - target: {fileID: 8943242379589839027, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
       propertyPath: m_Mass
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943242379589839027, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 30000
       objectReference: {fileID: 0}
     - target: {fileID: 8943242379589839027, guid: 8258fdccd226b584b8dc1c7ac1652db0, type: 3}
       propertyPath: m_SidewaysFriction.m_Stiffness
@@ -530,12 +550,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515562921}
   m_LocalRotation: {x: -0.0052359584, y: -0, z: -0, w: 0.9999863}
-  m_LocalPosition: {x: 2.120964, y: 4.5, z: -6.5}
+  m_LocalPosition: {x: 0, y: 1.5, z: -6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 387135891}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -0.6, y: 0, z: 0}
 --- !u!114 &1515562925
 MonoBehaviour:
@@ -544,7 +564,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515562921}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9105f4ffbe8dac4db35c7b8ca46fda7, type: 3}
   m_Name: 
